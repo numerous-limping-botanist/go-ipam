@@ -1,4 +1,4 @@
-module github.com/metal-stack/go-ipam
+module github.com/numerous-limping-botanist/go-ipam
 
 go 1.17
 
