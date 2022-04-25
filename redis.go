@@ -34,6 +34,20 @@ func newRedis(ip, port string) *redis {
 	}
 }
 
+func NewRedisWithOptions(options *redigo.Options) Storage {
+	return newRedisWithOptions(options)
+}
+
+func newRedisWithOptions(options *redigo.Options) *redis {
+	rdb := redigo.NewClient(options)
+
+	return &redis{
+		rdb:  rdb,
+		lock: sync.RWMutex{},
+	}
+}
+
+
 func (r *redis) CreatePrefix(prefix Prefix) (Prefix, error) {
 	r.lock.Lock()
 	defer r.lock.Unlock()
